@@ -768,12 +768,7 @@ class Mustache {
 	 * @return void
 	 */
 	protected function _pushContext(&$local_context) {
-		$new = array();
-		$new[] =& $local_context;
-		foreach (array_keys($this->_context) as $key) {
-			$new[] =& $this->_context[$key];
-		}
-		$this->_context = $new;
+		array_unshift($this->_context, $local_context);
 	}
 
 	/**
@@ -783,14 +778,7 @@ class Mustache {
 	 * @return void
 	 */
 	protected function _popContext() {
-		$new = array();
-
-		$keys = array_keys($this->_context);
-		array_shift($keys);
-		foreach ($keys as $key) {
-			$new[] =& $this->_context[$key];
-		}
-		$this->_context = $new;
+		array_shift($this->_context);
 	}
 
 	/**
