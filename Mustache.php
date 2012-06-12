@@ -213,7 +213,13 @@ class Mustache {
 		$ctag_orig = $this->_ctag;
 
 		if ($view) {
-			$this->_context = array_merge($this->_context, array($view));
+			if (is_array($this->_context[0])) {
+				$this->_context[0] = array_merge($this->_context[0], $view);
+			} else {
+				foreach($view as $name => $value) {
+					$this->_context[0]->$name = $value;
+				}
+			}
 		} else if (empty($this->_context)) {
 			$this->_context = array($this);
 		}
