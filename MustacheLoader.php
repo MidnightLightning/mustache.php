@@ -24,7 +24,7 @@ class MustacheLoader implements ArrayAccess {
 			throw new InvalidArgumentException('$baseDir must be a valid directory, ' . $baseDir . ' given.');
 		}
 
-		$this->baseDir   = $baseDir;
+		$this->baseDir   = trim($baseDir, '/');
 		$this->extension = $extension;
 	}
 
